@@ -1,0 +1,35 @@
+@layer base {
+  :root {
+    --color-bg: #f7f7f3;
+    --color-surface: #ffffff;
+    --color-text: #1f2933;
+    --color-muted: #6b7280;
+    --color-border: #e5e7eb;
+
+    --color-primary: #2f7d5c;
+    --color-primary-soft: color-mix(in oklab, var(--color-primary) 12%, white);
+
+    --color-danger: #b42318;
+    --color-danger-soft: color-mix(in oklab, var(--color-danger) 12%, white);
+
+    --color-warning: #b7791f;
+    --color-warning-soft: color-mix(in oklab, var(--color-warning) 14%, white);
+
+    --radius-sm: 0.5rem;
+    --radius-md: 0.75rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.25rem;
+
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+
+    --shadow-card: 0 1px 3px rgb(15 23 42 / 0.08),
+      0 1px 2px rgb(15 23 42 / 0.04);
+  }
+}
