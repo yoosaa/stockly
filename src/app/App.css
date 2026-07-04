@@ -1,73 +1,222 @@
 @layer features {
-  .app-shell {
+  .app {
     min-height: 100vh;
-    padding: var(--space-8);
+    background: var(--color-background);
   }
 
-  .hero-card {
+  .app-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    height: var(--header-height);
+    background: color-mix(in oklab, var(--color-surface) 96%, transparent);
+    border-bottom: 1px solid var(--color-border-subtle);
+    backdrop-filter: blur(12px);
+  }
+
+  .app-header__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: var(--space-6);
-    max-width: 72rem;
+    width: min(100% - var(--page-x) * 2, var(--container-width));
+    height: 100%;
     margin-inline: auto;
-    padding: var(--space-8);
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-card);
   }
 
-  .hero-card__eyebrow {
-    margin: 0;
+  .app-header__brand-area {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    min-width: 0;
+  }
+
+  .app-header__brand {
     color: var(--color-primary);
-    font-size: 0.875rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
+    font-family: var(--font-heading);
+    font-size: 1.875rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    white-space: nowrap;
   }
 
-  .hero-card__title {
-    margin: var(--space-2) 0 0;
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    line-height: 1.1;
+  .app-header__nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+  }
+
+  .app-header__nav-link {
+    position: relative;
+    color: var(--color-muted);
+    font-size: var(--font-size-body);
+    font-weight: 500;
+    transition: color 160ms ease;
+  }
+
+  .app-header__nav-link:hover {
+    color: var(--color-primary);
+  }
+
+  .app-header__nav-link--active {
+    color: var(--color-primary);
+    font-weight: 800;
+  }
+
+  .app-header__nav-link--active::after {
+    position: absolute;
+    right: 0;
+    bottom: -0.5rem;
+    left: 0;
+    height: 2px;
+    background: var(--color-primary);
+    border-radius: var(--radius-full);
+    content: "";
+  }
+
+  .app-header__add-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    min-height: 3rem;
+    padding: 0 var(--space-6);
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    font-weight: 700;
+    transition: background 160ms ease, transform 160ms ease;
+  }
+
+  .app-header__add-button:hover {
+    background: var(--color-primary-hover);
+  }
+
+  .app-header__add-button:active {
+    transform: scale(0.97);
+  }
+
+  .app-header__add-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  .app-main {
+    width: min(100% - var(--page-x) * 2, var(--container-width));
+    margin-inline: auto;
+    padding-block: var(--space-12) var(--space-16);
+  }
+
+  .app-hero {
+    margin-bottom: var(--space-8);
+  }
+
+  .app-hero__title {
+    margin: 0;
+    color: var(--color-text);
+    font-size: clamp(2rem, 5vw, var(--font-size-display));
+    line-height: var(--line-height-tight);
     letter-spacing: -0.04em;
   }
 
-  .hero-card__description {
-    max-width: 38rem;
-    margin: var(--space-4) 0 0;
+  .app-hero__description {
+    max-width: 40rem;
+    margin: var(--space-3) 0 0;
     color: var(--color-muted);
-    font-size: 1rem;
-    line-height: 1.8;
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-body);
   }
 
-  .hero-card__button {
-    flex-shrink: 0;
-    padding: 0.75rem 1rem;
-    border-radius: var(--radius-md);
-    background: var(--color-primary);
-    color: white;
-    font-weight: 700;
+  .app-placeholder-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+
+  .app-summary-card {
+    position: relative;
+    min-height: 9rem;
+    padding: var(--space-6);
+    overflow: hidden;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-subtle);
+    border-left-width: 4px;
+    border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card);
+    transition: box-shadow 160ms ease, transform 160ms ease;
   }
 
-  .hero-card__button:hover {
-    background: color-mix(in oklab, var(--color-primary) 88%, black);
+  .app-summary-card:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
   }
 
-  @media (width < 720px) {
-    .app-shell {
-      padding: var(--space-4);
+  .app-summary-card--danger {
+    border-left-color: var(--color-danger);
+  }
+
+  .app-summary-card--warning {
+    border-left-color: var(--color-warning);
+  }
+
+  .app-summary-card--primary {
+    border-left-color: var(--color-primary);
+  }
+
+  .app-summary-card__label {
+    margin: 0;
+    color: var(--color-text-subtle);
+    font-family: var(--font-heading);
+    font-size: var(--font-size-title);
+    font-weight: 600;
+  }
+
+  .app-summary-card__value {
+    position: absolute;
+    top: var(--space-5);
+    right: var(--space-6);
+    margin: 0;
+    color: var(--color-text);
+    font-family: var(--font-heading);
+    font-size: var(--font-size-heading);
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .app-summary-card__description {
+    max-width: 16rem;
+    margin: var(--space-2) 0 0;
+    color: var(--color-muted);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-body);
+  }
+
+  @media (width < 880px) {
+    .app-header__nav {
+      display: none;
     }
 
-    .hero-card {
-      align-items: stretch;
-      flex-direction: column;
-      padding: var(--space-6);
+    .app-placeholder-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (width < 560px) {
+    .app-header__add-button {
+      padding-inline: var(--space-4);
     }
 
-    .hero-card__button {
-      width: 100%;
+    .app-header__add-button {
+      font-size: 0;
+    }
+
+    .app-header__add-icon {
+      font-size: 1.5rem;
+    }
+
+    .app-main {
+      padding-block: var(--space-8) var(--space-12);
     }
   }
 }
