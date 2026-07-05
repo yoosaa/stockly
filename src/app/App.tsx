@@ -1,6 +1,11 @@
+import { FoodSummaryCards, mockFoods, summarizeFoods } from "../features/foods";
 import "./App.css";
 
+const today = new Date(2026, 6, 4);
+
 export function App() {
+  const summary = summarizeFoods(mockFoods, today);
+
   return (
     <div className="app">
       <header className="app-header">
@@ -46,31 +51,7 @@ export function App() {
           </p>
         </section>
 
-        <section className="app-placeholder-grid" aria-label="サマリー">
-          <div className="app-summary-card app-summary-card--danger">
-            <p className="app-summary-card__label">期限切れ</p>
-            <p className="app-summary-card__value">2</p>
-            <p className="app-summary-card__description">
-              早めに確認したい食材です。
-            </p>
-          </div>
-
-          <div className="app-summary-card app-summary-card--warning">
-            <p className="app-summary-card__label">期限間近</p>
-            <p className="app-summary-card__value">5</p>
-            <p className="app-summary-card__description">
-              3日以内に使いたい食材です。
-            </p>
-          </div>
-
-          <div className="app-summary-card app-summary-card--primary">
-            <p className="app-summary-card__label">登録食材</p>
-            <p className="app-summary-card__value">42</p>
-            <p className="app-summary-card__description">
-              すべての保管場所の合計です。
-            </p>
-          </div>
-        </section>
+        <FoodSummaryCards summary={summary} />
       </main>
     </div>
   );

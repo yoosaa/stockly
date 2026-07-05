@@ -1,0 +1,100 @@
+@layer features {
+  .food-summary-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+
+  .food-summary-card {
+    min-height: 9rem;
+    padding: var(--space-6);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-subtle);
+    border-left-width: 4px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    transition: box-shadow 160ms ease, transform 160ms ease;
+  }
+
+  .food-summary-card:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+  }
+
+  .food-summary-card--danger {
+    border-left-color: var(--color-danger);
+  }
+
+  .food-summary-card--warning {
+    border-left-color: var(--color-warning);
+  }
+
+  .food-summary-card--primary {
+    border-left-color: var(--color-primary);
+  }
+
+  .food-summary-card__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-bottom: var(--space-3);
+  }
+
+  .food-summary-card__icon {
+    display: inline-grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .food-summary-card--danger .food-summary-card__icon {
+    background: var(--color-danger-soft);
+    color: var(--color-danger-text);
+  }
+
+  .food-summary-card--warning .food-summary-card__icon {
+    background: var(--color-warning-soft);
+    color: var(--color-warning-text);
+  }
+
+  .food-summary-card--primary .food-summary-card__icon {
+    background: var(--color-primary-soft);
+    color: var(--color-on-primary-soft);
+  }
+
+  .food-summary-card__value {
+    margin: 0;
+    color: var(--color-text);
+    font-family: var(--font-heading);
+    font-size: var(--font-size-heading);
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .food-summary-card__title {
+    margin: 0;
+    color: var(--color-text-subtle);
+    font-family: var(--font-heading);
+    font-size: var(--font-size-title);
+    font-weight: 600;
+  }
+
+  .food-summary-card__description {
+    margin: var(--space-1) 0 0;
+    color: var(--color-muted);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-body);
+  }
+
+  @media (width < 880px) {
+    .food-summary-cards {
+      grid-template-columns: 1fr;
+    }
+  }
+}
