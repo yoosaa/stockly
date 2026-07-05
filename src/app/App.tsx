@@ -1,7 +1,13 @@
-import { FoodSummaryCards, mockFoods, summarizeFoods } from "../features/foods";
+import {
+  FoodFilters,
+  FoodSummaryCards,
+  FoodTable,
+  mockFoods,
+  summarizeFoods,
+} from "../features/foods";
 import "./App.css";
 
-const today = new Date(2026, 6, 4);
+const today = new Date(2026, 6, 5);
 
 export function App() {
   const summary = summarizeFoods(mockFoods, today);
@@ -52,6 +58,23 @@ export function App() {
         </section>
 
         <FoodSummaryCards summary={summary} />
+
+        <section className="app-inventory" aria-labelledby="inventory-title">
+          <div className="app-inventory__heading">
+            <div>
+              <p className="app-inventory__eyebrow">Inventory</p>
+              <h2 className="app-inventory__title" id="inventory-title">
+                食材一覧
+              </h2>
+            </div>
+            <p className="app-inventory__description">
+              登録済みの食材と賞味期限を確認できます。
+            </p>
+          </div>
+
+          <FoodFilters />
+          <FoodTable foods={mockFoods} today={today} />
+        </section>
       </main>
     </div>
   );

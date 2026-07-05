@@ -1,0 +1,119 @@
+@layer features {
+  .food-table-row {
+    color: var(--color-text-subtle);
+    font-size: var(--font-size-sm);
+    transition: background-color 140ms ease;
+  }
+
+  .food-table-row:hover {
+    background: color-mix(
+      in oklab,
+      var(--color-primary-soft) 14%,
+      var(--color-surface)
+    );
+  }
+
+  .food-table-row:not(:last-child) {
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .food-table-row td {
+    height: 4.5rem;
+    padding: var(--space-3) var(--space-4);
+    white-space: nowrap;
+  }
+
+  .food-table-row__food {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .food-table-row__avatar {
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 2.25rem;
+    height: 2.25rem;
+    background: var(--color-primary-soft);
+    color: var(--color-on-primary-soft);
+    border-radius: var(--radius-md);
+    font-family: var(--font-heading);
+    font-size: var(--font-size-sm);
+    font-weight: 800;
+  }
+
+  .food-table-row__name,
+  .food-table-row__quantity {
+    color: var(--color-text);
+    font-weight: 700;
+  }
+
+  .food-table-row__category,
+  .food-table-row__status {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+  }
+
+  .food-table-row__category {
+    padding: 0.35rem 0.7rem;
+    background: var(--color-secondary-soft);
+    color: var(--color-secondary-text);
+  }
+
+  .food-table-row__status {
+    gap: 0.4rem;
+    padding: 0.35rem 0.65rem;
+  }
+
+  .food-table-row__status[data-expiry-status="expired"] {
+    background: var(--color-danger-soft);
+    color: var(--color-danger-text);
+  }
+
+  .food-table-row__status[data-expiry-status="expiringSoon"] {
+    background: var(--color-warning-soft);
+    color: var(--color-warning-text);
+  }
+
+  .food-table-row__status[data-expiry-status="safe"] {
+    background: var(--color-primary-soft);
+    color: var(--color-on-primary-soft);
+  }
+
+  .food-table-row__status-dot {
+    width: 0.4rem;
+    height: 0.4rem;
+    background: currentColor;
+    border-radius: 50%;
+  }
+
+  .food-table-row__menu {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    background: transparent;
+    color: var(--color-muted);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-sm);
+    letter-spacing: 0.08em;
+    line-height: 1;
+    transition: background-color 140ms ease, color 140ms ease;
+  }
+
+  .food-table-row__menu:hover {
+    background: var(--color-surface-container);
+    color: var(--color-primary);
+  }
+
+  .food-table-row__menu:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
