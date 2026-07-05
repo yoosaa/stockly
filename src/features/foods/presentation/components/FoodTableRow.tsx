@@ -1,3 +1,4 @@
+import { parseYmdToLocalDate } from "../../../../shared/utils/date";
 import { getExpiryStatus } from "../../domain/expiryStatus";
 import type { FoodItem } from "../../domain/food";
 import {
@@ -19,7 +20,7 @@ const dateFormatter = new Intl.DateTimeFormat("ja-JP", {
 });
 
 function formatExpiryDate(expiryDate: string) {
-  return dateFormatter.format(new Date(`${expiryDate}T00:00:00`));
+  return dateFormatter.format(parseYmdToLocalDate(expiryDate));
 }
 
 export function FoodTableRow({ food, today }: FoodTableRowProps) {

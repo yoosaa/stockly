@@ -14,9 +14,7 @@ export function FoodTable({ foods, today }: FoodTableProps) {
         <p className="food-table-card__count">
           <strong>{foods.length}</strong> 件の食材
         </p>
-        <p className="food-table-card__hint">
-          賞味期限が近い順に表示しています
-        </p>
+        <p className="food-table-card__hint">登録済みの食材を表示しています</p>
       </div>
 
       <div className="food-table-card__scroller">
