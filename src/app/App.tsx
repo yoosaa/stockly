@@ -1,16 +1,28 @@
+import { useState } from "react";
 import {
+  filterFoods,
   FoodFilters,
   FoodSummaryCards,
   FoodTable,
   mockFoods,
   summarizeFoods,
 } from "../features/foods";
+import type { FoodFilterCriteria } from "../features/foods";
 import "./App.css";
 
 const today = new Date(2026, 6, 5);
 
+const initialFoodFilters: FoodFilterCriteria = {
+  searchText: "",
+  category: "all",
+  storageLocation: "all",
+  expiryStatus: "all",
+};
+
 export function App() {
+  const [filters, setFilters] = useState(initialFoodFilters);
   const summary = summarizeFoods(mockFoods, today);
+  const filteredFoods = filterFoods(mockFoods, filters, today);
 
   return (
     <div className="app">
@@ -72,8 +84,8 @@ export function App() {
             </p>
           </div>
 
-          <FoodFilters />
-          <FoodTable foods={mockFoods} today={today} />
+          <FoodFilters filters={filters} onFiltersChange={setFilters} />
+          <FoodTable foods={filteredFoods} today={today} />
         </section>
       </main>
     </div>
