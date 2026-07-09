@@ -1,0 +1,145 @@
+@layer features {
+  .food-form {
+    padding: var(--space-6);
+    margin-bottom: var(--space-8);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-card);
+  }
+
+  .food-form__header {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: var(--space-6);
+    margin-bottom: var(--space-5);
+  }
+
+  .food-form__eyebrow {
+    margin: 0 0 var(--space-1);
+    color: var(--color-primary);
+    font-size: var(--font-size-xs);
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .food-form__title {
+    margin: 0;
+    font-size: var(--font-size-title);
+    letter-spacing: -0.03em;
+  }
+
+  .food-form__description {
+    max-width: 28rem;
+    margin: 0;
+    color: var(--color-muted);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-body);
+  }
+
+  .food-form__grid {
+    display: grid;
+    grid-template-columns: 2fr repeat(5, minmax(0, 1fr));
+    gap: var(--space-3);
+    align-items: end;
+  }
+
+  .food-form__field {
+    display: grid;
+    gap: var(--space-2);
+    min-width: 0;
+  }
+
+  .food-form__field--wide {
+    min-width: 12rem;
+  }
+
+  .food-form__label {
+    color: var(--color-text-subtle);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+  }
+
+  .food-form__input,
+  .food-form__select {
+    width: 100%;
+    height: 2.75rem;
+    padding: 0 var(--space-3);
+    background-color: var(--color-surface-low);
+    color: var(--color-text);
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    outline: none;
+    transition: background-color 160ms ease, border-color 160ms ease,
+      box-shadow 160ms ease;
+  }
+
+  .food-form__input:hover,
+  .food-form__select:hover {
+    background-color: var(--color-surface-container);
+  }
+
+  .food-form__input:focus,
+  .food-form__select:focus {
+    background-color: var(--color-surface);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px
+      color-mix(in oklab, var(--color-primary) 14%, transparent);
+  }
+
+  .food-form__actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: var(--space-5);
+  }
+
+  .food-form__submit {
+    min-height: 2.75rem;
+    padding: 0 var(--space-6);
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    transition: background 160ms ease, transform 160ms ease;
+  }
+
+  .food-form__submit:hover {
+    background: var(--color-primary-hover);
+  }
+
+  .food-form__submit:active {
+    transform: scale(0.98);
+  }
+
+  @media (width < 980px) {
+    .food-form__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .food-form__field--wide {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (width < 620px) {
+    .food-form__header {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .food-form__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .food-form__actions {
+      justify-content: stretch;
+    }
+
+    .food-form__submit {
+      width: 100%;
+    }
+  }
+}

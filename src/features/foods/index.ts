@@ -8,3 +8,5 @@ export { summarizeFoods } from "./application/summarizeFoods";
 export { sortFoods } from "./application/sortFoods";
 export type { FoodSortKey } from "./application/sortFoods";
 export { FoodSortSelect } from "./presentation/components/FoodSortSelect";
+export { FoodForm } from "./presentation/components/FoodForm";
+export type { FoodFormValues } from "./presentation/components/FoodForm";
