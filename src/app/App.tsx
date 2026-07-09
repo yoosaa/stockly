@@ -1,15 +1,21 @@
-import { useState, useMemo } from "react";
+import { useMemo, useState } from "react";
 import {
+  FoodForm,
   filterFoods,
   FoodFilters,
+  FoodSortSelect,
   FoodSummaryCards,
   FoodTable,
   mockFoods,
-  summarizeFoods,
   sortFoods,
-  FoodSortSelect,
+  summarizeFoods,
 } from "../features/foods";
-import type { FoodFilterCriteria, FoodSortKey } from "../features/foods";
+import type {
+  FoodFilterCriteria,
+  FoodSortKey,
+  FoodFormValues,
+} from "../features/foods";
+import type { FoodItem } from "../features/foods/domain/food";
 import "./App.css";
 
 const today = new Date(2026, 6, 5);
@@ -24,15 +30,27 @@ const initialFoodFilters: FoodFilterCriteria = {
 const initialSortKey: FoodSortKey = "expiryDateAsc";
 
 export function App() {
-  const [sortKey, setSortKey] = useState(initialSortKey);
+  const [foods, setFoods] = useState<FoodItem[]>(mockFoods);
   const [filters, setFilters] = useState(initialFoodFilters);
-  const summary = summarizeFoods(mockFoods, today);
+  const [sortKey, setSortKey] = useState(initialSortKey);
+
+  const summary = summarizeFoods(foods, today);
 
   const visibleFoods = useMemo(() => {
-    const filteredFoods = filterFoods(mockFoods, filters, today);
+    const filteredFoods = filterFoods(foods, filters, today);
 
     return sortFoods(filteredFoods, sortKey);
-  }, [filters, sortKey]);
+  }, [foods, filters, sortKey]);
+
+  function handleAddFood(values: FoodFormValues) {
+    const food: FoodItem = {
+      id: `food-${Date.now()}`,
+      ...values,
+      createdAt: new Date().toISOString(),
+    };
+
+    setFoods((currentFoods) => [food, ...currentFoods]);
+  }
 
   return (
     <div className="app">
@@ -62,7 +80,11 @@ export function App() {
             </nav>
           </div>
 
-          <button className="app-header__add-button" type="button">
+          <button
+            className="app-header__add-button"
+            type="submit"
+            form="food-form"
+          >
             <span className="app-header__add-icon" aria-hidden="true">
               +
             </span>
@@ -80,6 +102,13 @@ export function App() {
         </section>
 
         <FoodSummaryCards summary={summary} />
+
+        <FoodForm onAddFood={handleAddFood} />
+
+        <section
+          className="app-inventory"
+          aria-labelledby="inventory-title"
+        ></section>
 
         <section className="app-inventory" aria-labelledby="inventory-title">
           <div className="app-inventory__heading">
