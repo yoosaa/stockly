@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import {
   filterFoods,
   FoodFilters,
@@ -6,8 +6,10 @@ import {
   FoodTable,
   mockFoods,
   summarizeFoods,
+  sortFoods,
+  FoodSortSelect,
 } from "../features/foods";
-import type { FoodFilterCriteria } from "../features/foods";
+import type { FoodFilterCriteria, FoodSortKey } from "../features/foods";
 import "./App.css";
 
 const today = new Date(2026, 6, 5);
@@ -19,10 +21,18 @@ const initialFoodFilters: FoodFilterCriteria = {
   expiryStatus: "all",
 };
 
+const initialSortKey: FoodSortKey = "expiryDateAsc";
+
 export function App() {
+  const [sortKey, setSortKey] = useState(initialSortKey);
   const [filters, setFilters] = useState(initialFoodFilters);
   const summary = summarizeFoods(mockFoods, today);
-  const filteredFoods = filterFoods(mockFoods, filters, today);
+
+  const visibleFoods = useMemo(() => {
+    const filteredFoods = filterFoods(mockFoods, filters, today);
+
+    return sortFoods(filteredFoods, sortKey);
+  }, [filters, sortKey]);
 
   return (
     <div className="app">
@@ -85,7 +95,8 @@ export function App() {
           </div>
 
           <FoodFilters filters={filters} onFiltersChange={setFilters} />
-          <FoodTable foods={filteredFoods} today={today} />
+          <FoodSortSelect sortKey={sortKey} onSortKeyChange={setSortKey} />
+          <FoodTable foods={visibleFoods} today={today} />
         </section>
       </main>
     </div>

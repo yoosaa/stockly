@@ -5,3 +5,6 @@ export { mockFoods } from "./presentation/fixtures/mockFoods";
 export { filterFoods } from "./application/filterFoods";
 export type { FoodFilterCriteria } from "./application/filterFoods";
 export { summarizeFoods } from "./application/summarizeFoods";
+export { sortFoods } from "./application/sortFoods";
+export type { FoodSortKey } from "./application/sortFoods";
+export { FoodSortSelect } from "./presentation/components/FoodSortSelect";
