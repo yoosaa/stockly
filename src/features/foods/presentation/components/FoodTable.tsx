@@ -29,9 +29,6 @@ export function FoodTable({ foods, today, onDeleteFood }: FoodTableProps) {
               <th scope="col">賞味期限</th>
               <th scope="col">ステータス</th>
               <th scope="col">操作</th>
-              <th className="food-table__actions-heading" scope="col">
-                <span className="food-table__visually-hidden">操作</span>
-              </th>
             </tr>
           </thead>
           <tbody>

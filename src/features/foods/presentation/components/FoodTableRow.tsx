@@ -61,15 +61,6 @@ export function FoodTableRow({ food, today, onDeleteFood }: FoodTableRowProps) {
           {expiryStatusLabels[expiryStatus]}
         </span>
       </td>
-      <td>
-        <button
-          className="food-table-row__menu"
-          type="button"
-          aria-label={`${food.name}の操作`}
-        >
-          <span aria-hidden="true">•••</span>
-        </button>
-      </td>
       <td className="food-table__cell food-table__cell--actions">
         <button
           className="food-table__delete-button"
