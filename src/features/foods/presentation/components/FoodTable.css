@@ -79,6 +79,30 @@
     border: 0;
   }
 
+  .food-table__cell--actions {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .food-table__delete-button {
+    min-height: 2.25rem;
+    padding: 0 var(--space-3);
+    background: var(--color-danger-soft);
+    color: var(--color-danger-text);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    transition: background-color 160ms ease, transform 160ms ease;
+  }
+
+  .food-table__delete-button:hover {
+    background: color-mix(in oklab, var(--color-danger-soft) 82%, black);
+  }
+
+  .food-table__delete-button:active {
+    transform: scale(0.96);
+  }
+
   @media (width < 560px) {
     .food-table-card__meta {
       align-items: flex-start;

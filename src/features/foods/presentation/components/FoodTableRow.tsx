@@ -11,6 +11,7 @@ import "./FoodTableRow.css";
 type FoodTableRowProps = {
   food: FoodItem;
   today: Date;
+  onDeleteFood: (foodId: string) => void;
 };
 
 const dateFormatter = new Intl.DateTimeFormat("ja-JP", {
@@ -23,7 +24,7 @@ function formatExpiryDate(expiryDate: string) {
   return dateFormatter.format(parseYmdToLocalDate(expiryDate));
 }
 
-export function FoodTableRow({ food, today }: FoodTableRowProps) {
+export function FoodTableRow({ food, today, onDeleteFood }: FoodTableRowProps) {
   const expiryStatus = getExpiryStatus(food.expiryDate, today);
 
   return (
@@ -67,6 +68,16 @@ export function FoodTableRow({ food, today }: FoodTableRowProps) {
           aria-label={`${food.name}の操作`}
         >
           <span aria-hidden="true">•••</span>
+        </button>
+      </td>
+      <td className="food-table__cell food-table__cell--actions">
+        <button
+          className="food-table__delete-button"
+          type="button"
+          onClick={() => onDeleteFood(food.id)}
+          aria-label={`${food.name}を削除`}
+        >
+          削除
         </button>
       </td>
     </tr>

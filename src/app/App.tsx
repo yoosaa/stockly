@@ -52,6 +52,12 @@ export function App() {
     setFoods((currentFoods) => [food, ...currentFoods]);
   }
 
+  function handleDeleteFood(foodId: string) {
+    setFoods((currentFoods) =>
+      currentFoods.filter((food) => food.id !== foodId)
+    );
+  }
+
   return (
     <div className="app">
       <header className="app-header">
@@ -105,11 +111,6 @@ export function App() {
 
         <FoodForm onAddFood={handleAddFood} />
 
-        <section
-          className="app-inventory"
-          aria-labelledby="inventory-title"
-        ></section>
-
         <section className="app-inventory" aria-labelledby="inventory-title">
           <div className="app-inventory__heading">
             <div>
@@ -125,7 +126,11 @@ export function App() {
 
           <FoodFilters filters={filters} onFiltersChange={setFilters} />
           <FoodSortSelect sortKey={sortKey} onSortKeyChange={setSortKey} />
-          <FoodTable foods={visibleFoods} today={today} />
+          <FoodTable
+            foods={visibleFoods}
+            today={today}
+            onDeleteFood={handleDeleteFood}
+          />
         </section>
       </main>
     </div>

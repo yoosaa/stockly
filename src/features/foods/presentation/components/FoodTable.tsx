@@ -5,9 +5,10 @@ import { FoodTableRow } from "./FoodTableRow";
 type FoodTableProps = {
   foods: FoodItem[];
   today: Date;
+  onDeleteFood: (foodId: string) => void;
 };
 
-export function FoodTable({ foods, today }: FoodTableProps) {
+export function FoodTable({ foods, today, onDeleteFood }: FoodTableProps) {
   return (
     <div className="food-table-card">
       <div className="food-table-card__meta">
@@ -27,6 +28,7 @@ export function FoodTable({ foods, today }: FoodTableProps) {
               <th scope="col">保管場所</th>
               <th scope="col">賞味期限</th>
               <th scope="col">ステータス</th>
+              <th scope="col">操作</th>
               <th className="food-table__actions-heading" scope="col">
                 <span className="food-table__visually-hidden">操作</span>
               </th>
@@ -34,7 +36,12 @@ export function FoodTable({ foods, today }: FoodTableProps) {
           </thead>
           <tbody>
             {foods.map((food) => (
-              <FoodTableRow key={food.id} food={food} today={today} />
+              <FoodTableRow
+                key={food.id}
+                food={food}
+                today={today}
+                onDeleteFood={onDeleteFood}
+              />
             ))}
           </tbody>
         </table>
