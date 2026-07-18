@@ -33,10 +33,12 @@ function validateFoodForm(values: FoodFormValues): FoodFormErrors {
 }
 
 type FoodFormProps = {
-  onAddFood: (values: FoodFormValues) => void;
+  initialValues?: FoodFormValues;
+  onSubmitFood: (values: FoodFormValues) => void;
+  onCancelEdit?: () => void;
 };
 
-const initialValues: FoodFormValues = {
+const emptyFoodFormValues: FoodFormValues = {
   name: "",
   quantity: 1,
   unit: "個",
@@ -53,8 +55,14 @@ const storageLocationOptions = Object.entries(storageLocationLabels) as Array<
   [StorageLocation, string]
 >;
 
-export function FoodForm({ onAddFood }: FoodFormProps) {
-  const [values, setValues] = useState<FoodFormValues>(initialValues);
+export function FoodForm({
+  initialValues,
+  onSubmitFood,
+  onCancelEdit,
+}: FoodFormProps) {
+  const isEditing = initialValues !== undefined;
+  const formInitialValues = initialValues ?? emptyFoodFormValues;
+  const [values, setValues] = useState<FoodFormValues>(formInitialValues);
   const [errors, setErrors] = useState<FoodFormErrors>({});
 
   function updateValue<Key extends keyof FoodFormValues>(
@@ -84,21 +92,34 @@ export function FoodForm({ onAddFood }: FoodFormProps) {
 
     const trimmedName = values.name.trim();
 
-    onAddFood({
+    onSubmitFood({
       ...values,
       name: trimmedName,
     });
 
     setErrors({});
-    setValues(initialValues);
+
+    if (!isEditing) {
+      setValues(emptyFoodFormValues);
+    }
+  }
+
+  function handleCancelEdit() {
+    setErrors({});
+    setValues(emptyFoodFormValues);
+    onCancelEdit?.();
   }
 
   return (
     <form className="food-form" id="food-form" onSubmit={handleSubmit}>
       <div className="food-form__header">
         <div>
-          <p className="food-form__eyebrow">Add food</p>
-          <h2 className="food-form__title">食材を追加する</h2>
+          <p className="food-form__eyebrow">
+            {isEditing ? "Edit food" : "Add food"}
+          </p>
+          <h2 className="food-form__title">
+            {isEditing ? "食材を編集" : "食材を追加する"}
+          </h2>
         </div>
         <p className="food-form__description">
           家にある食材名、数量、保管場所、賞味期限を入力します。
@@ -143,7 +164,7 @@ export function FoodForm({ onAddFood }: FoodFormProps) {
 
           <span
             className="food-form__error"
-            id="food-name-error"
+            id="food-quantity-error"
             aria-live="polite"
           >
             {errors.quantity ?? ""}
@@ -163,7 +184,7 @@ export function FoodForm({ onAddFood }: FoodFormProps) {
 
           <span
             className="food-form__error"
-            id="food-name-error"
+            id="food-unit-error"
             aria-live="polite"
           >
             {errors.unit ?? ""}
@@ -226,7 +247,7 @@ export function FoodForm({ onAddFood }: FoodFormProps) {
 
           <span
             className="food-form__error"
-            id="food-name-error"
+            id="food-expiry-date-error"
             aria-live="polite"
           >
             {errors.expiryDate ?? ""}
@@ -235,8 +256,17 @@ export function FoodForm({ onAddFood }: FoodFormProps) {
       </div>
 
       <div className="food-form__actions">
+        {isEditing ? (
+          <button
+            className="food-form__cancel"
+            type="button"
+            onClick={handleCancelEdit}
+          >
+            キャンセル
+          </button>
+        ) : null}
         <button className="food-form__submit" type="submit">
-          食材を追加
+          {isEditing ? "変更を保存" : "食材を追加"}
         </button>
       </div>
     </form>

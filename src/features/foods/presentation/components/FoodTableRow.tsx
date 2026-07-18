@@ -11,6 +11,8 @@ import "./FoodTableRow.css";
 type FoodTableRowProps = {
   food: FoodItem;
   today: Date;
+  isEditing: boolean;
+  onEditFood: (foodId: string) => void;
   onDeleteFood: (foodId: string) => void;
 };
 
@@ -24,11 +26,20 @@ function formatExpiryDate(expiryDate: string) {
   return dateFormatter.format(parseYmdToLocalDate(expiryDate));
 }
 
-export function FoodTableRow({ food, today, onDeleteFood }: FoodTableRowProps) {
+export function FoodTableRow({
+  food,
+  today,
+  isEditing,
+  onEditFood,
+  onDeleteFood,
+}: FoodTableRowProps) {
   const expiryStatus = getExpiryStatus(food.expiryDate, today);
 
   return (
-    <tr className="food-table-row">
+    <tr
+      className="food-table-row"
+      data-editing={isEditing ? "true" : undefined}
+    >
       <td>
         <div className="food-table-row__food">
           <span className="food-table-row__avatar" aria-hidden="true">
@@ -62,6 +73,15 @@ export function FoodTableRow({ food, today, onDeleteFood }: FoodTableRowProps) {
         </span>
       </td>
       <td className="food-table__cell food-table__cell--actions">
+        <button
+          className="food-table__edit-button"
+          type="button"
+          onClick={() => onEditFood(food.id)}
+          aria-label={`${food.name}を編集`}
+          data-active={isEditing ? "true" : undefined}
+        >
+          編集
+        </button>
         <button
           className="food-table__delete-button"
           type="button"

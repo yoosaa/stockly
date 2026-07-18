@@ -80,25 +80,50 @@
   }
 
   .food-table__cell--actions {
-    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--space-2);
     white-space: nowrap;
   }
 
+  .food-table__edit-button,
   .food-table__delete-button {
     min-height: 2.25rem;
     padding: 0 var(--space-3);
-    background: var(--color-danger-soft);
-    color: var(--color-danger-text);
     border-radius: var(--radius-full);
     font-size: var(--font-size-xs);
     font-weight: 700;
-    transition: background-color 160ms ease, transform 160ms ease;
+    transition: background-color 160ms ease, color 160ms ease,
+      transform 160ms ease;
+  }
+
+  .food-table__edit-button {
+    background: var(--color-primary-soft);
+    color: var(--color-on-primary-soft);
+  }
+
+  .food-table__delete-button {
+    background: var(--color-danger-soft);
+    color: var(--color-danger-text);
+  }
+
+  .food-table__edit-button:hover,
+  .food-table__edit-button[data-active="true"] {
+    background: var(--color-primary-soft-dim);
   }
 
   .food-table__delete-button:hover {
     background: color-mix(in oklab, var(--color-danger-soft) 82%, black);
   }
 
+  .food-table__edit-button:focus-visible,
+  .food-table__delete-button:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  .food-table__edit-button:active,
   .food-table__delete-button:active {
     transform: scale(0.96);
   }

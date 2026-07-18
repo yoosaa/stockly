@@ -91,26 +91,49 @@
 
   .food-form__actions {
     display: flex;
+    gap: var(--space-3);
     justify-content: flex-end;
     margin-top: var(--space-5);
   }
 
-  .food-form__submit {
+  .food-form__submit,
+  .food-form__cancel {
     min-height: 2.75rem;
     padding: 0 var(--space-6);
-    background: var(--color-primary);
-    color: var(--color-on-primary);
     border-radius: var(--radius-md);
     font-weight: 700;
-    transition: background 160ms ease, transform 160ms ease;
+    transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+  }
+
+  .food-form__submit {
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+  }
+
+  .food-form__cancel {
+    background: var(--color-surface-low);
+    color: var(--color-text-subtle);
+    border: 1px solid var(--color-border-subtle);
   }
 
   .food-form__submit:hover {
     background: var(--color-primary-hover);
   }
 
-  .food-form__submit:active {
+  .food-form__cancel:hover {
+    background: var(--color-surface-container);
+    color: var(--color-text);
+  }
+
+  .food-form__submit:active,
+  .food-form__cancel:active {
     transform: scale(0.98);
+  }
+
+  .food-form__submit:focus-visible,
+  .food-form__cancel:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
   }
 
   .food-form__error {
@@ -154,10 +177,12 @@
     }
 
     .food-form__actions {
+      flex-direction: column-reverse;
       justify-content: stretch;
     }
 
-    .food-form__submit {
+    .food-form__submit,
+    .food-form__cancel {
       width: 100%;
     }
   }
