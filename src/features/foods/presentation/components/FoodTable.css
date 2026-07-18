@@ -109,7 +109,7 @@
   }
 
   .food-table__edit-button:hover,
-  .food-table__edit-button[aria-pressed="true"] {
+  .food-table__edit-button[data-active="true"] {
     background: var(--color-primary-soft-dim);
   }
 

@@ -38,7 +38,6 @@ export function FoodTableRow({
   return (
     <tr
       className="food-table-row"
-      aria-selected={isEditing}
       data-editing={isEditing ? "true" : undefined}
     >
       <td>
@@ -79,7 +78,7 @@ export function FoodTableRow({
           type="button"
           onClick={() => onEditFood(food.id)}
           aria-label={`${food.name}を編集`}
-          aria-pressed={isEditing}
+          data-active={isEditing ? "true" : undefined}
         >
           編集
         </button>
