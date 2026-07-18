@@ -113,6 +113,25 @@
     transform: scale(0.98);
   }
 
+  .food-form__error {
+    min-height: 1.4em;
+    color: var(--color-danger-text);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+
+  .food-form__input[aria-invalid="true"],
+  .food-form__select[aria-invalid="true"] {
+    border-color: var(--color-danger);
+    background-color: color-mix(
+      in oklab,
+      var(--color-danger-soft) 42%,
+      var(--color-surface)
+    );
+  }
+
   @media (width < 980px) {
     .food-form__grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
