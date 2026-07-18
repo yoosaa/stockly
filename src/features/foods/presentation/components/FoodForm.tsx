@@ -132,6 +132,7 @@ export function FoodForm({ onAddFood }: FoodFormProps) {
           <input
             className="food-form__input"
             type="number"
+            min="1"
             value={values.quantity}
             aria-invalid={Boolean(errors.quantity)}
             aria-describedby="food-quantity-error"
@@ -155,8 +156,8 @@ export function FoodForm({ onAddFood }: FoodFormProps) {
             className="food-form__input"
             type="text"
             value={values.unit}
-            aria-invalid={Boolean(errors.quantity)}
-            aria-describedby="food-quantity-error"
+            aria-invalid={Boolean(errors.unit)}
+            aria-describedby="food-unit-error"
             onChange={(event) => updateValue("unit", event.target.value)}
           />
 
@@ -218,8 +219,8 @@ export function FoodForm({ onAddFood }: FoodFormProps) {
             className="food-form__input"
             type="date"
             value={values.expiryDate}
-            aria-invalid={Boolean(errors.quantity)}
-            aria-describedby="food-quantity-error"
+            aria-invalid={Boolean(errors.expiryDate)}
+            aria-describedby="food-expiry-date-error"
             onChange={(event) => updateValue("expiryDate", event.target.value)}
           />
 
