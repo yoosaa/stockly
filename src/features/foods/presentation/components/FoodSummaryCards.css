@@ -8,6 +8,7 @@
   .food-summary-card {
     min-height: 9rem;
     padding: var(--space-6);
+    margin-bottom: var(--space-8);
     background: var(--color-surface);
     border: 1px solid var(--color-border-subtle);
     border-left-width: 4px;
