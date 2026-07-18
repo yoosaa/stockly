@@ -5,10 +5,18 @@ import { FoodTableRow } from "./FoodTableRow";
 type FoodTableProps = {
   foods: FoodItem[];
   today: Date;
+  editingFoodId: string | null;
+  onEditFood: (foodId: string) => void;
   onDeleteFood: (foodId: string) => void;
 };
 
-export function FoodTable({ foods, today, onDeleteFood }: FoodTableProps) {
+export function FoodTable({
+  foods,
+  today,
+  editingFoodId,
+  onEditFood,
+  onDeleteFood,
+}: FoodTableProps) {
   return (
     <div className="food-table-card">
       <div className="food-table-card__meta">
@@ -37,6 +45,8 @@ export function FoodTable({ foods, today, onDeleteFood }: FoodTableProps) {
                 key={food.id}
                 food={food}
                 today={today}
+                isEditing={food.id === editingFoodId}
+                onEditFood={onEditFood}
                 onDeleteFood={onDeleteFood}
               />
             ))}
